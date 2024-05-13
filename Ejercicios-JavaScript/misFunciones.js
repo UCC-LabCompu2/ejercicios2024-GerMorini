@@ -1,9 +1,8 @@
 /**
- * Descripción
- * @method Nombre de la función
- * @param Parámetro A
- * @param Parámetro B
- * @return Valor que retorna
+ * Convierte las unidades ingresadas por el usuario en el formulario
+ * @method convertirUnidades
+ * @param {string} nombre - ID del elemento en el HTML
+ * @param {number} valor - valor ingresado por el usuario
  */
 function convertirUnidades(nombre, valor) {
     if (isNaN(valor)) {
