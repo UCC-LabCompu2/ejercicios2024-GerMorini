@@ -5,7 +5,6 @@
  * @param {number} valor - valor ingresado por el usuario
  */
 
-// TODO: asignar las conversiónes correctas para las demás unidades
 let convertirUnidades = (nombre, valor) => {
     let valMetro, valPulgada, valPie, valYarda
 
@@ -26,27 +25,27 @@ let convertirUnidades = (nombre, valor) => {
             valPie = valor * 3.28084
             valYarda = valor * 1.093
         } else if (nombre === "pulgada") {
+            valMetro = valor * 0.0254
             valPulgada = valor
-            valMetro = valor * 39.3701
-            valPie = valor * 3.28084
-            valYarda = valor * 1.093
+            valPie = valor * 0.08333
+            valYarda = valor * 0.02777
         } else if (nombre === "pie") {
+            valMetro = valor * 0.3048
+            valPulgada = valor * 12
             valPie = valor
-            valPulgada = valor * 39.3701
-            valMetro = valor * 3.28084
-            valYarda = valor * 1.093
+            valYarda = valor * 0.33333
         } else if (nombre === "yarda") {
+            valMetro = valor * 0.9144
+            valPulgada = valor * 36
+            valPie = valor * 3
             valYarda = valor
-            valPulgada = valor * 39.3701
-            valPie = valor * 3.28084
-            valMetro = valor * 1.093
         }
     }
 
     document.getElementById('metro').value = Math.round(valMetro*100)/100
     document.getElementById('pulgada').value = Math.round(valPulgada*100)/100
-    document.getElementById('pie').value = valPie.toFixed(2)
-    document.getElementById('yarda').value = valYarda.toFixed(2)
+    document.getElementById('pie').value = Math.round(valPie*100)/100
+    document.getElementById('yarda').value = Math.round(valYarda*100)/100
 }
 
 /**
@@ -137,4 +136,28 @@ let cargar_valores = () => {
     cant = url[1]
     unit = url[2]
     document.getElementById("dist").value = `${cant} ${unit}`
+}
+
+/**
+ * toma los valores de distancia y unidad, los almacena en el local storage y redirige
+ * hacia la segunda web
+ */
+let guardarLS = () => {
+    const distancia = document.getElementById("distancia").value
+    const unidad = document.getElementById("unidades").value
+
+    localStorage.setItem("distanciaLS", distancia)
+    localStorage.setItem("unidadLS", unidad)
+
+    window.open("segundaWeb_copia.html")
+}
+
+/**
+ * carga los valores de distancia y unidad almacenados en el local storage
+ */
+let cargarLS = () => {
+    const distancia = localStorage.getItem("distanciaLS")
+    const unidad = localStorage.getItem("unidadLS")
+
+    document.getElementById("dist").value = `${distancia} ${unidad}`
 }
