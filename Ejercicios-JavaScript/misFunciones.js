@@ -209,3 +209,50 @@ let limpiarCanvas = () => {
     const canvas = document.getElementById("lienzo")
     canvas.width = canvas.width
 }
+
+/**
+ * dibuja un cuadriculado dentro del canvas
+ */
+let dibujarCuadriculado = () => {
+    const canvas = document.getElementById("myCanvas")
+    const ctx = canvas.getContext("2d")
+
+    const xmax = canvas.width
+    const ymax = canvas.height
+    const paso = 40
+
+    ctx.strokeStyle = "#bbb9b9"
+    // dibujo de lineas horizontales
+    for (let i = paso; i < ymax; i += paso) {
+        ctx.beginPath()
+        ctx.moveTo(0, i)
+        ctx.lineTo(xmax, i)
+        ctx.stroke()
+        ctx.closePath()
+    }
+
+    // dibujo de líneas verticales
+    for (let i = paso; i < xmax; i += paso) {
+        ctx.beginPath()
+        ctx.moveTo(i, 0)
+        ctx.lineTo(i, xmax)
+        ctx.stroke()
+    }
+
+    // dibujar eje X
+    ctx.beginPath()
+    ctx.moveTo(0, ymax/2)
+    ctx.lineTo(xmax, ymax/2)
+    ctx.strokeStyle = "#000000"
+    ctx.stroke()
+    ctx.closePath()
+
+    // dibujar eje Y
+    ctx.beginPath()
+    ctx.moveTo(xmax/2, 0)
+    ctx.lineTo(xmax/2, ymax)
+    ctx.strokeStyle = "#000000"
+    ctx.stroke()
+    ctx.closePath()
+
+}
