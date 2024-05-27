@@ -161,3 +161,51 @@ let cargarLS = () => {
 
     document.getElementById("dist").value = `${distancia} ${unidad}`
 }
+
+/**
+ * dibuja un círculo y un cuadrado en el canvas
+ */
+let dibujar = () => {
+    const canvas = document.getElementById("myCanvas")
+    const ctx = canvas.getContext("2d")
+    ctx.fillStyle = "#333899"
+
+    const xmax = canvas.width
+    const ymax = canvas.height
+    const lado = 100
+    const margen = 10
+
+    ctx.fillRect(margen, ymax - lado - margen, lado, lado)
+    ctx.arc(xmax / 2, ymax / 2, 20, 0, 2*Math.PI)
+    ctx.fill()
+}
+
+/**
+ * asigna un listener al canvas para poder dibujar
+ */
+let cargarListener = () => {
+    const canvas = document.getElementById("lienzo")
+    const ctx = canvas.getContext("2d")
+    var bandera
+
+    canvas.onmousedown = () => {bandera = true}
+    canvas.onmouseup = () => {bandera = false}
+
+    document.getElementById("lienzo").addEventListener("mousemove", (ev) => {
+        if (bandera) {
+            let pos_x = ev.clientX
+            let pos_y = ev.clientY
+
+            ctx.fillStyle = "#f33333"
+            ctx.fillRect(pos_x, pos_y, 3, 3)
+        }
+    })
+}
+
+/**
+ * limpia lo dibujado en el canvas
+ */
+let limpiarCanvas = () => {
+    const canvas = document.getElementById("lienzo")
+    canvas.width = canvas.width
+}
