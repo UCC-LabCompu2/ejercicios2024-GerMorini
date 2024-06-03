@@ -255,4 +255,72 @@ let dibujarCuadriculado = () => {
     ctx.stroke()
     ctx.closePath()
 
+    // escribir en el eje X
+    ctx.font = "10px Verdana"
+    ctx.fillStyle = "blue"
+    let numx = -10 // TODO: mejorar esto
+    for (let i = 0; i < xmax;) {
+        ctx.fillText(String(numx), i, ymax/2)
+        i += paso
+        numx++
+    }
+
+    // escribir en el eje y
+    let numy = -10
+    for (let i = 0; i < ymax;) {
+        ctx.fillText(String(numy), xmax/2, i)
+        i += paso
+        numy++
+    }
+}
+
+/**
+ *  Dibuja una imagen en las coordenadas especificadas
+ * @param posX posicion X de la imagen
+ * @param posY posicion Y de la imagen
+ */
+function dibujarImagen(posX, posY) {
+    const canvas = document.getElementById("myCanvas")
+    const ctx = canvas.getContext("2d")
+
+    canvas.width = canvas.width
+    const img = new Image()
+    img.src = "images/auto.png"
+    if (posX < 0 || posY < 0 || posX > canvas.width || posY > canvas.height) {
+        mostrarDialog()
+    } else {
+        img.onload = function () {
+            ctx.drawImage(img, posX, posY)
+        }
+    }
+}
+
+/**
+ * Muestra el dialogo de error
+ */
+function mostrarDialog() {
+   const dial = document.getElementById("myDialog")
+   dial.showModal()
+}
+
+/**
+ * Cierra el dialogo de error
+ */
+function cerrarDialog() {
+    const dial = document.getElementById("myDialog")
+    dial.close()
+}
+
+x = 0
+dx = 2
+
+function animarAuto() {
+    const canvas = document.getElementById("myCanvas")
+    const ctx = canvas.getContext("2d")
+    const img = new Image()
+    img.src = "images/auto.png"
+    img.onload = function () {
+        ctx.drawImage(img, x, 100)
+    }
+    x += dx
 }
