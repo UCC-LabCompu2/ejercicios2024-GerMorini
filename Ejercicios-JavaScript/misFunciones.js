@@ -311,16 +311,43 @@ function cerrarDialog() {
     dial.close()
 }
 
+var id
 x = 0
 dx = 2
 
 function animarAuto() {
     const canvas = document.getElementById("myCanvas")
     const ctx = canvas.getContext("2d")
+
     const img = new Image()
     img.src = "images/auto.png"
     img.onload = function () {
+        canvas.width = canvas.width
         ctx.drawImage(img, x, 100)
+        id = requestAnimationFrame(animarAuto)
+    }
+
+    if (x > canvas.width) {
+        x = 0
     }
     x += dx
+}
+
+
+function detenerAuto() {
+    clearInterval(id)
+}
+
+function comenzarAnimacion() {
+    id = setInterval(animarAuto, 10)
+    setTimeout(detenerAuto, 6000)
+}
+
+function animarNuevo() {
+    setTimeout(cancelarAnimacion, 6000)
+    requestAnimationFrame(animarAuto)
+}
+
+function cancelarAnimacion() {
+    cancelAnimationFrame(id)
 }
